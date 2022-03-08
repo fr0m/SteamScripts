@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         makePack
 // @namespace    https://github.com/fr0m/SteamScripts
-// @version      0.1
+// @version      0.2
 // @description  auto make steam card pack
 // @author       fr0m
 // @updateURL    https://github.com/fr0m/SteamScripts/raw/main/makePack.meta.js
