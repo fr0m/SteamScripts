@@ -15,7 +15,7 @@
 (function() {
     'use strict';
   
-    window.onload(() => {
+    window.onload = () => {
       document.querySelector('.booster_option.minioption').click();
       document.querySelector('#booster_game_selector_booster').querySelector('.booster_option').querySelector('.btn_makepack').click();
       document.querySelector('.newmodal').querySelector('.btn_green_steamui').click();
@@ -23,5 +23,5 @@
       setTimeout(() => {
         window.location.reload();
       }, 60 * 1000);
-    });
+    };
 })();
