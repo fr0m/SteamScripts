@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         makePack
 // @namespace    https://github.com/fr0m/SteamScripts
-// @version      0.4
+// @version      0.5
 // @description  auto make steam card pack
 // @author       fr0m
 // @updateURL    https://github.com/fr0m/SteamScripts/raw/main/makePack.meta.js
@@ -16,16 +16,19 @@
     'use strict';
   
     window.onload = () => {
-      document.querySelector('.booster_option.minioption').click();
-      document.querySelector('#booster_game_selector_booster').querySelector('.booster_option').querySelector('.btn_makepack').click();
-      if (document.querySelector('.newmodal')) {
-        document.querySelector('.newmodal').querySelector('.btn_green_steamui').click();
-        console.log('pack made');
-      }
+        try {
+            document.querySelector('.booster_option.minioption').click();
+            document.querySelector('#booster_game_selector_booster').querySelector('.booster_option').querySelector('.btn_makepack').click();
+            if (document.querySelector('.newmodal')) {
+                document.querySelector('.newmodal').querySelector('.btn_green_steamui').click();
+                console.log('pack made');
+            }
+            
+        } catch {}
       
-      setTimeout(() => {
+        setTimeout(() => {
         console.log('reloading');
         window.location.reload();
-      }, 60 * 1000);
+        }, 60 * 1000);
     };
 })();
