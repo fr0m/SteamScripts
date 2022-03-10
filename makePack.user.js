@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         makePack
 // @namespace    https://github.com/fr0m/SteamScripts
-// @version      0.6
+// @version      0.7
 // @description  auto make steam card pack
 // @author       fr0m
 // @updateURL    https://github.com/fr0m/SteamScripts/raw/main/makePack.meta.js
@@ -20,12 +20,15 @@
     const regularInterval = 60 * 1000;
     
     const lastPackMadeAt = localStorage.getItem(lastPackMadeAtKey);
+    const now = Date.now();
 
-    let interval = lastPackMadeAt ? (maxInterval - (Date.now() - lastPackMadeAt)) : regularInterval;
+    let interval = lastPackMadeAt ? (maxInterval - (now - lastPackMadeAt)) : regularInterval;
     
     if (interval < 0) {
         interval = regularInterval;
     }
+    
+    console.log('NEXT RELOADING AT:', (new Date(now + interval)).toString());
   
     window.onload = () => {
         try {
@@ -43,7 +46,7 @@
     };
     
     setTimeout(() => {
-        console.log('reloading');
+        console.log('RELOADING');
         window.location.reload();
     }, interval);
 })();
