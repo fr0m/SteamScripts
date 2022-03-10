@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         makePack
 // @namespace    https://github.com/fr0m/SteamScripts
-// @version      0.5
+// @version      0.6
 // @description  auto make steam card pack
 // @author       fr0m
 // @updateURL    https://github.com/fr0m/SteamScripts/raw/main/makePack.meta.js
@@ -14,21 +14,36 @@
 
 (function() {
     'use strict';
+    
+    const lastPackMadeAtKey = 'fr0m_lastPackMadeAt';
+    const maxInterval = 24 * 60 * 60 * 1000 + 1000;
+    const regularInterval = 60 * 1000;
+    
+    const lastPackMadeAt = localStorage.getItem(lastPackMadeAtKey);
+
+    let interval = lastPackMadeAt ? (maxInterval - (Date.now() - lastPackMadeAt)) : regularInterval;
+    
+    if (interval < 0) {
+        interval = regularInterval;
+    }
   
     window.onload = () => {
         try {
             document.querySelector('.booster_option.minioption').click();
             document.querySelector('#booster_game_selector_booster').querySelector('.booster_option').querySelector('.btn_makepack').click();
-            if (document.querySelector('.newmodal')) {
-                document.querySelector('.newmodal').querySelector('.btn_green_steamui').click();
-                console.log('pack made');
+            
+            const modal = document.querySelector('.newmodal');
+            if (modal) {
+                modal.querySelector('.btn_green_steamui').click();
+                localStorage.setItem(lastPackMadeAtKey, Date.now());
+                console.log('%c PACK MADE ', 'background: #fd5353; color: #fff; font-size: 16px;');
             }
             
         } catch {}
-      
-        setTimeout(() => {
+    };
+    
+    setTimeout(() => {
         console.log('reloading');
         window.location.reload();
-        }, 60 * 1000);
-    };
+    }, interval);
 })();
